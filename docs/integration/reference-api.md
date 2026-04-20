@@ -98,12 +98,12 @@ Génère et renvoie un document json reprenant une partie des informations énum
 
 |Clé|Type|Valeur|
 |---|----|------|
-|song|object|Contient les clés `currentTime`, `timeStarted`, `duration` et `currentMeta`.|
+|**song**|**object**|Contient les clés `currentTime`, `timeStarted`, `duration` et `currentMeta`.|
 |currentTime|integer|Timestamp Unix contenant l'heure exacte du serveur au moment de la requête.|
 |timeStarted|string|Timestamp Unix contenant l'heure du serveur au moment où le contenu a démarré.|
 |duration|string|Durée du contenu en secondes (retourne `-1` si la durée est inconnue)|
 |currentMeta|string|Artiste - Titre|
-|radio|object|Contient les clés `listeners`, `status` et `motd`.|
+|**radio**|**object**|Contient les clés `listeners`, `status` et `motd`.|
 |listeners|string|Nombre d'auditeurs|
 |status|string|Type de programme en cours de diffusion (voir [STATUS.txt](#statustxt))
 |motd|string|Message du moment, longueur maximale de 100 caractères|
