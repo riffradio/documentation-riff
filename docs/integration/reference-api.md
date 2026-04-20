@@ -39,13 +39,13 @@ Renvoie le type de programme en cours de diffusion. Ce type de contenu peut êtr
 - `Spécial` : Une programmation spéciale, le plus souvent sous forme de playlist générée spécifiquement pour l'occasion mais diffusée par le robot et dénuée d'animateur.
 - `PARTY` : Une émission en direct exceptionnelle de type « Grand événement », telle qu'une émission anniversaire, un live 24h, ou autre surprise.
 
-⚠️ Ces valeurs devraient être considérées comme non sensibles à la casse, et votre implémentation se doit donc d'envisager tous les scénarios (p. ex. : `LIVE` ou `Live` sont deux valeurs acceptées pour une émission en direct).
+> ⚠️ Ces valeurs devraient être considérées comme non sensibles à la casse, et votre implémentation se doit donc d'envisager tous les scénarios (p. ex. : `LIVE` ou `Live` sont deux valeurs acceptées pour une émission en direct).
 
 #### auditeurs
 
 Renvoie le nombre d'auditeurs (estimé) actuellement à l'écoute de Riff, sous forme de chiffre. Par exemple `24`. Mis à jour une fois par minute.
 
-⚠️ Pas d'extension .txt sur ce point de terminaison.
+> ⚠️ Pas d'extension .txt sur ce point de terminaison.
 
 #### last.txt
 
@@ -63,13 +63,13 @@ Le format dépend du type de programme en cours de diffusion :
 - **Pendant les émissions en direct (y compris PARTY) :** Le format est à la discrétion de l'animateur mais généralement de type `Nom de l'émission (Artiste - Titre)` ou `Nom de l'émission`.
 - **Pendant les podcasts, différés ou rediffusions :** Le format est généralement de type `Nom et numéro ou date de l'émission`.
 
-⚠️ Dans de rares cas, la valeur rapportée par ce point de terminaison peut varier des métadonnées transmises par le serveur de diffusion (Shoutcast). Ce point de terminaison rapporte en effet le contenu en cours de traitement au niveau de **l'outil d'automation** de la radio. Il ne tient par exemple pas compte d'une modification de métadonnées effectuée manuellement au niveau du serveur de diffusion lui-même.
+> ⚠️ Dans de rares cas, la valeur rapportée par ce point de terminaison peut varier des métadonnées transmises par le serveur de diffusion (Shoutcast). Ce point de terminaison rapporte en effet le contenu en cours de traitement au niveau de **l'outil d'automation** de la radio. Il ne tient par exemple pas compte d'une modification de métadonnées effectuée manuellement au niveau du serveur de diffusion lui-même.
 
 #### msg.txt
 
 Renvoie un « message du jour » sous forme de chaîne d'une longueur inférieure ou égale à 100 caractères. Ce message est mis à jour manuellement, sans régularité et peut contenir une actu de la radio, une petite blague ou autre.
 
-⚠️ Le message peut être remplacé par : `/!\Error: Outdated version!!/!\`, auquel cas cela signifie que cette version de l'API n'est plus prise en charge ou que le serveur a changé d'adresse et que les URL actuellement utilisées seront bientôt désactivées. Il est recommandé d'interpréter la présence de cette chaîne comme une erreur fatale.
+> ⚠️ Le message peut être remplacé par : `/!\Error: Outdated version!!/!\`, auquel cas cela signifie que cette version de l'API n'est plus prise en charge ou que le serveur a changé d'adresse et que les URL actuellement utilisées seront bientôt désactivées. Il est recommandé d'interpréter la présence de cette chaîne comme une erreur fatale.
 
 #### duration.txt
 
@@ -82,9 +82,9 @@ Renvoie la durée en secondes du fichier ou contenu en cours de diffusion (lorsq
 1234567890\n
 ```
 
-⚠️ Le dernier \n, après le timestamp Unix, peut être présent ou absent, il est donc recommandé de prendre en charge les deux scénarios.
+> ⚠️ Le dernier \n, après le timestamp Unix, peut être présent ou absent, il est donc recommandé de prendre en charge les deux scénarios.
 
-⚠️ Lorsque la durée du fichier est inconnue (soit qu'il s'agisse d'une émission en direct, soit que le serveur n'ait pas été capable de calculer la durée du fichier), la première valeur est remplacée par `-1`. Le timestamp reste néanmoins généré. Il reste donc possible de savoir à quelle heure et depuis combien de temps le programme a commencé.
+> ⚠️ Lorsque la durée du fichier est inconnue (soit qu'il s'agisse d'une émission en direct, soit que le serveur n'ait pas été capable de calculer la durée du fichier), la première valeur est remplacée par `-1`. Le timestamp reste néanmoins généré. Il reste donc possible de savoir à quelle heure et depuis combien de temps le programme a commencé.
 
 #### timestamp.php
 
@@ -126,7 +126,7 @@ Génère et renvoie un document json reprenant une partie des informations énum
 }
 ```
 
-⚠️ Notez que, pour des raisons historiques, le timestamp de currentTime est servi sous forme d'`integer` alors que le timestamp de timeStarted (et avec lui toutes les autres valeurs numériques) est servi sous forme de `string`.
+> ⚠️ Notez que, pour des raisons historiques, le timestamp de currentTime est servi sous forme d'`integer` alors que le timestamp de timeStarted (et avec lui toutes les autres valeurs numériques) est servi sous forme de `string`.
 
 ### Page HTML
 

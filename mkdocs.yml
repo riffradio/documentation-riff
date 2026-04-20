@@ -19,3 +19,5 @@ nav:
   - Documentation projets open-source:
     - Présentation logiciels Windows: opensource/presentation-logiciels-windows-open-source-riff.md
 
+extra_css:
+  - stylesheets/extra.css
