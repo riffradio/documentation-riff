@@ -1,0 +1,21 @@
+site_name: Documentation de Riff
+
+theme:
+  name: material
+  palette: 
+  - scheme: slate 
+    primary: red
+    accent: red
+  features:
+    - navigation.tabs
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Accueil: index.md
+  - Intégration:
+    - Référence API: integration/reference-api.md
+    - Intégration OBS Studio: integration/howto-integration-metadonnees-riff.md
+  - Documentation projets open-source:
+    - Présentation logiciels Windows: opensource/presentation-logiciels-windows-open-source-riff.md
+
