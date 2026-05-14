@@ -10,14 +10,12 @@ theme:
     - navigation.tabs
     - search.suggest
     - content.code.copy
+    - navigation.instant
+    - navigation.tracking
+    - toc.follow
 
-nav:
-  - Accueil: index.md
-  - Intégration:
-    - Référence API: integration/reference-api.md
-    - Intégration OBS Studio: integration/howto-integration-metadonnees-riff.md
-  - Documentation projets open-source:
-    - Présentation logiciels Windows: opensource/presentation-logiciels-windows-open-source-riff.md
+plugins:
+  - search
 
 extra_css:
   - stylesheets/extra.css
