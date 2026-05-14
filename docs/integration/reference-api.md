@@ -24,6 +24,10 @@ La plupart des points de terminaison de l'API renvoient des données au format t
 
 Sauf mention contraire, les données sont encodées au standard d'encodage UTF-8.
 
+### Cache
+
+Sauf mention contraire, il est déconseillé de placer ces réponses en cache car la plupart sont susceptibles de changer à tout moment, et pour certains même à chaque requête.
+
 ## Liste des points de terminaison
 
 ### Texte brut
@@ -68,6 +72,8 @@ Le format dépend du type de programme en cours de diffusion :
 #### msg.txt
 
 Renvoie un « message du jour » sous forme de chaîne d'une longueur inférieure ou égale à 100 caractères. Ce message est mis à jour manuellement, sans régularité et peut contenir une actu de la radio, une petite blague ou autre.
+
+> 💡 La réponse renvoyée par ce point de terminaison peut éventuellement être mise en cache, dans la mesure où celle-ci change peu fréquemment (une fois toutes les quelques semaines ou quelques mois).
 
 > ⚠️ Le message peut être remplacé par : `/!\Error: Outdated version!!/!\`, auquel cas cela signifie que cette version de l'API n'est plus prise en charge ou que le serveur a changé d'adresse et que les URL actuellement utilisées seront bientôt désactivées. Il est recommandé d'interpréter la présence de cette chaîne comme une erreur fatale.
 
