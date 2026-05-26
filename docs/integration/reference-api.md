@@ -57,6 +57,8 @@ Renvoie la liste des dix derniers contenus diffusés à l'antenne de Riff. On en
 
 Pour le type de format, se référer au point de terminaison [meta_last.txt](#meta_lasttxt).
 
+> 💡 Les titres les plus récents sont en bas de la liste.
+
 #### meta_last.txt
 
 Le contenu en cours de diffusion, tel que rapporté par l'outil d'automation de la radio.
@@ -74,7 +76,7 @@ Le format dépend du type de programme en cours de diffusion :
 Renvoie un « message du jour » sous forme de chaîne d'une longueur inférieure ou égale à 100 caractères. Ce message est mis à jour manuellement, sans régularité et peut contenir une actu de la radio, une petite blague ou autre.
 
 > 💡 La réponse renvoyée par ce point de terminaison peut éventuellement être mise en cache, dans la mesure où celle-ci change peu fréquemment (une fois toutes les quelques semaines ou quelques mois).
-
+>
 > ⚠️ Le message peut être remplacé par : `/!\Error: Outdated version!!/!\`, auquel cas cela signifie que cette version de l'API n'est plus prise en charge ou que le serveur a changé d'adresse et que les URL actuellement utilisées seront bientôt désactivées. Il est recommandé d'interpréter la présence de cette chaîne comme une erreur fatale.
 
 #### duration.txt
@@ -89,7 +91,7 @@ Renvoie la durée en secondes du fichier ou contenu en cours de diffusion (lorsq
 ```
 
 > ⚠️ Le dernier \n, après le timestamp Unix, peut être présent ou absent, il est donc recommandé de prendre en charge les deux scénarios.
-
+>
 > ⚠️ Lorsque la durée du fichier est inconnue (soit qu'il s'agisse d'une émission en direct, soit que le serveur n'ait pas été capable de calculer la durée du fichier), la première valeur est remplacée par `-1`. Le timestamp reste néanmoins généré. Il reste donc possible de savoir à quelle heure et depuis combien de temps le programme a commencé.
 
 #### timestamp.php
@@ -111,7 +113,7 @@ Génère et renvoie un document json reprenant une partie des informations énum
 |currentMeta|string|Artiste - Titre|
 |**radio**|**object**|Contient les clés `listeners`, `status` et `motd`.|
 |listeners|string|Nombre d'auditeurs|
-|status|string|Type de programme en cours de diffusion (voir [STATUS.txt](#statustxt))
+|status|string|Type de programme en cours de diffusion (voir [STATUS.txt](#statustxt))|
 |motd|string|Message du moment, longueur maximale de 100 caractères|
 
  La réponse ressemble à ceci :
