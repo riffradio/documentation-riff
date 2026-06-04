@@ -102,7 +102,20 @@ Génère et renvoie l'heure exacte du serveur, au moment de la requête, sous fo
 
 #### public.json.php
 
-Génère et renvoie un document json reprenant une partie des informations énumérées précédemment, au même format et avec les mêmes particularités. Il est constitué de la manière suivante :
+Génère et renvoie un document json reprenant une partie des informations énumérées précédemment, au même format et avec les mêmes particularités.
+
+##### public.json.php - Paramètres
+
+- `section` (facultatif) : L'une des valeurs entre `radio`, `song` et `all` (par défaut : `all`).
+  - `radio` : Renvoie uniquement l'objet radio avec les paires clé-valeur associées.
+  - `song` : Renvoie uniquement l'objet song avec les paires clé-valeur associées.
+  - `all` : Renvoie l'ensemble des données au sein d'un même JSON.
+
+**Remarque** : En l'absence de ce paramètre ou en cas de valeur différente, le comportement par défaut est adopté (équivalent à `all`). Le paramètre peut donc être omis pour obtenir le fichier complet.
+
+##### public.json.php - Réponse
+
+Par défaut, le fichier est constitué de la manière suivante :
 
 |Clé|Type|Valeur|
 |---|----|------|
@@ -133,6 +146,8 @@ Génère et renvoie un document json reprenant une partie des informations énum
   }
 }
 ```
+
+L'un ou l'autre objet pourra être émis en fonction de l'utilisation du paramètre `section` (voir section [paramètres](#publicjsonphp---paramètres)).
 
 > ⚠️ Notez que, pour des raisons historiques, le timestamp de currentTime est servi sous forme d'`integer` alors que le timestamp de timeStarted (et avec lui toutes les autres valeurs numériques) est servi sous forme de `string`.
 
