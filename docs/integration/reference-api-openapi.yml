@@ -1,0 +1,338 @@
+openapi: 3.1.0
+info:
+    title: Référence de l'API de Riff
+    summary: API permettant d'accéder aux métadonnées de la radio et du programme en cours de diffusion.
+    version: 1.0.2
+    description: |
+        API minimaliste permet un accès simple et en (quasi-)temps réel à certaines informations concernant la webradio et les contenus en cours de diffusion ou précédemment diffusés.  
+        L'API ne nécessite aucune clé ni authentification. Il s'agit d'une API read-only, permettant de récupérer des données, mais pas d'interagir avec la webradio.  
+        À l'heure actuelle, l'API n'applique pas de politique de *rate limiting*. Il est néanmoins demandé de ne pas dépasser 1 requête par seconde, par client et par point de terminaison.
+        Le serveur autorise explicitement les requêtes cross-origin (CORS) depuis n'importe quelle origine.
+    contact:
+        name: Azrael/GauthierC
+        url: https://www.riff-radio.org
+        email: contact@riff-radio.org
+
+servers:
+    - url: https://api.riff-radio.org/0
+    - url: http://api.riff-radio.org/0
+
+tags:
+  - name: Données
+    description: "Données à intégrer ou parser telles quelles dans une page web ou un script"
+  - name: Widget
+    description: "Page web complète à intégrer à l'échelle d'une app ou d'un outil de compositing"
+
+paths:
+    /STATUS.txt:
+        get:
+            tags:
+              - Données
+            summary: Renvoie le type de programme en cours de diffusion. Ce type de contenu peut être manuellement modifié pour une valeur personnalisée par l'équipe de la webradio.
+            responses: 
+                '304':
+                    description: Non-modifié (si en-tête `If-None-Match` ou `If-Modified-Since` présent dans la requête)
+                '200':
+                    description: Succès
+                    content:
+                        text/plain; charset=utf-8: 
+                            schema:
+                                type: string
+                                enum:
+                                    - LIVE
+                                    - PLAYLIST
+                                    - Spécial
+                                    - Podcast
+                                    - REDIFFUSION
+                                    - REDIF
+                                    - PARTY
+                                x-enumDescriptions:
+                                    LIVE: Émission en direct
+                                    PLAYLIST: Programmation musicale automatique 24/24
+                                    Spécial: Playlist spéciale (automatique)
+                                    Podcast: Émission préenregistrée et diffusée en différé
+                                    REDIFFUSION: Rediffusion d'une émission préalablement diffusée en direct sur la radio
+                                    REDIF: Version alternative de REDIFFUSION (même principe).
+                                    PARTY: Émission événement exceptionnelle en direct 
+                                description: |
+                                    Type de programme en cours de diffusion.
+                                    > ⚠️ Différentes casses et accentuations possibles. L'implémentation devrait être non-sensible à la casse ni aux accents, par exemple supporter `SPECIAL` **et** `Spécial` comme étant équivalents.
+                            examples: 
+                                Direct:
+                                    value: "LIVE"
+                                Rediffusion:
+                                    value: "REDIF"
+
+    /auditeurs:
+        get:
+            tags:
+              - Données
+            summary: Renvoie le nombre d'auditeurs cumulés à la minute précédente, sous forme de chiffre encodé dans une string.
+            responses: 
+                '304':
+                    description: Non-modifié (si en-tête `If-None-Match` ou `If-Modified-Since` présent dans la requête)
+                '200':
+                    description: Succès
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                            examples: 
+                                128 auditeurs:
+                                    value: "128"
+
+    /last.txt:
+        get:
+            tags:
+              - Données
+            summary: Renvoie les dix derniers contenus (musique ou émission) diffusés à l'antenne de Riff, à raison d'un par ligne. Chaque changement de métadonnées correspond à une nouvelle ligne. Les contenus les plus récents sont en bas de liste.
+            responses: 
+                '304':
+                    description: Non-modifié (si en-tête `If-None-Match` ou `If-Modified-Since` présent dans la requête)
+                '200':
+                    description: Succès
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                            examples:
+                                Derniers titres:
+                                    value: |
+                                        Oasis - Wonderwall
+                                        Yngwie J. Malmsteen - Soldier Without Faith
+                                        For Today - Isaiah (The Willing)
+                                        Led Zeppelin - All My Love
+                                        Lizzy Borden - Deal With The Devil
+                                        Deep Purple - Gettin' Tighter
+                                        Everclear - Father of Mine
+                                        Groundhogs - Cherry Red
+                                        Nirvana - Dumb
+                                        Iron Maiden - The Number Of The Beast
+
+    /meta_last.txt:
+        get:
+            tags:
+              - Données
+            summary: Renvoie uniquement le contenu en cours de diffusion.
+            responses:  
+                '304':
+                    description: Non-modifié (si en-tête `If-None-Match` ou `If-Modified-Since` présent dans la requête)
+                '200':
+                    description: Succès
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                description: |
+                                    Métadonnées du programme en cours de diffusion.  
+                                    Format : "Artiste - Titre" si titre de playlist, "Nom de l'émission (infos supplémentaire)" si émission en direct/podcast/rediffusion.
+                            examples:
+                                Dernier titre:
+                                    value: "Iron Maiden - The Number Of The Beast"
+
+    /msg.txt:
+        get:
+            tags:
+              - Données
+            summary: Renvoie le « message du jour » sous forme de chaîne de 100 caractères maximum.
+            responses:
+                '304':
+                    description: Non-modifié (si en-tête `If-None-Match` ou `If-Modified-Since` présent dans la requête)
+                '200':
+                    description: Succès
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                maxLength: 100
+                                description: |
+                                    Message du jour mis à jour manuellement à une fréquence aléatoire.  
+                                    Si le message indique `/!\Error: Outdated version!!/!\`, l'API ou son adresse est obsolète et sur le point d'être mise hors-service.  
+                                    Cette chaîne spécifique doit alors être traitée comme une erreur fatale. Sinon, elle a vocation à être affichée telle quelle à l'utilisateur.
+                            examples:
+                                Fin d'année:
+                                    value: "Joyeux Noël et bonne année !"
+
+    /duration.txt:
+        get:
+            tags:
+              - Données
+            summary: Renvoie la durée du programme en cours de diffusion (lorsque celle-ci est connue) ainsi que l'heure et date de début de ce programme.
+            responses:
+                '304':
+                    description: Non-modifié (si en-tête `If-None-Match` ou `If-Modified-Since` présent dans la requête)
+                '200':
+                    description: Succès
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                pattern: '^-?\d+\n\n\n\d+\n?$'
+                                description: |
+                                    Durée en secondes si connue, ou -1 si inconnue (ex: direct), suivi de trois sauts de ligne, suivi de l'heure et date de début (timestamp unix).  
+                                    Peut être suivi ou non d'un ultime retour à la ligne, les deux scénarios doivent être pris en charge.
+                            examples: 
+                                Durée connue:
+                                    value: "128\n\n\n1234567890\n"
+                                Durée inconnue:
+                                    value: "-1\n\n\n1234567890\n"
+
+    /timestamp.php:
+        get:
+            tags:
+              - Données
+            summary: Renvoie l'heure exacte du serveur au moment de la requête, sous forme de timestamp unix.
+            responses:
+                '200':
+                    description: Succès
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                            examples: 
+                                Timestamp:
+                                    value: "1234567789"
+
+    /public.json.php:
+        get:
+            tags:
+              - Données
+            parameters:
+              - in: query
+                name: section
+                required: false
+                schema:
+                    type: string
+                    enum: [radio, song, all]
+                description: |
+                    Sélectionne les objets JSON à servir.  
+                    `radio` renvoie uniquement l'objet radio, `song` renvoie uniquement l'objet song, `all` renvoie les deux.  
+                    Si le paramètre est omis ou si la valeur transmise n'est pas reconnue, l'ensemble est renvoyé (équivalent à `all`).
+                examples:
+                    song:
+                        value: song
+                    radio:
+                        value: radio
+                    all:
+                        value: all
+            summary: Renvoie plusieurs des informations précédemment décrites au sein d'un fichier JSON commun.
+            responses:
+                '200':
+                    description: Succès
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    song:
+                                        type: object
+                                        properties:
+                                            currentTime:
+                                                type: integer
+                                                format: int64
+                                                description: |
+                                                    Timestamp unix.  
+                                                    ⚠️ Seule valeur numérique non encapsulée dans une string.
+                                            timeStarted:
+                                                type: string
+                                                description: Timestamp unix encapsulé dans une string.
+                                            duration:
+                                                type: string
+                                                description: Nombre de secondes, ou -1 si inconnue. Encapsulé dans une string.
+                                            currentMeta:
+                                                type: string
+                                                description: |
+                                                    Métadonnées du programme en cours de diffusion.  
+                                                    Format : "Artiste - Titre" si titre de playlist, "Nom de l'émission (infos supplémentaire)" si émission en direct/podcast/rediffusion.
+                                    radio:
+                                        type: object
+                                        properties:
+                                            listeners:
+                                                type: string
+                                                description: Nombre d'auditeurs. Encapsulé dans une string
+                                            status:
+                                                type: string
+                                                enum:
+                                                  - LIVE
+                                                  - PLAYLIST
+                                                  - Spécial
+                                                  - Podcast
+                                                  - REDIFFUSION
+                                                  - REDIF
+                                                  - PARTY
+                                            motd:
+                                                type: string
+                                                description: Chaîne de 100 caractères maximum
+                                                maxLength: 100
+                            examples:
+                                section=song:
+                                    value:
+                                        song:
+                                            currentTime: 1780565515
+                                            timeStarted: "1780565432"
+                                            duration: "278"
+                                            currentMeta: "Led Zeppelin - Misty Mountain Hop"
+                                section=radio:
+                                    value:
+                                        radio:
+                                            listeners: "10"
+                                            status: "PLAYLIST"
+                                            motd: "Votez pour le Top Rock !"
+                                section=all:
+                                    value:
+                                        song:
+                                            currentTime: 1780565515
+                                            timeStarted: "1780565432"
+                                            duration: "278"
+                                            currentMeta: "Led Zeppelin - Misty Mountain Hop"
+                                        radio:
+                                            listeners: "10"
+                                            status: "PLAYLIST"
+                                            motd: "Votez pour le Top Rock !"
+                                Émission en live & section=song:
+                                    value:
+                                        song:
+                                            currentTime: 1780565515
+                                            timeStarted: "1780565432"
+                                            duration: "-1"
+                                            currentMeta: "L'anniversaire de Riff en direct avec toute l'équipe !"
+
+    /auto.php:
+        get:
+            tags: 
+                - Widget
+            summary: Renvoie une page HTML contenant l'artiste et le titre du programme en cours de diffusion, réactualisé automatiquement.
+            description: > 
+                            Renvoie une page HTML réactualisée automatiquement toutes les 3 secondes, 
+                            qui contient l'Artiste et le Titre en cours de diffusion au sein d'une balise `<div id="shoutcastmetacontent">`.
+                            À intégrer dans une source web, par exemple via Electron ou sous OBS Studio.
+            responses:
+                '200':
+                    description: Succès
+                    content:
+                        text/html:
+                            schema:
+                                type: string
+                            examples:
+                                Contenu:
+                                    value: |
+                                        <!DOCTYPE html>
+                                            <html lang="fr">
+                                            <head>
+                                                <meta charset="UTF-8">
+                                                <title>Riff Meta Autorefresh</title> </head> 
+                                            <body>
+                                                <div id="shoutcastmetacontent">&nbsp;</div>
+                                                <script>
+                                                    function fetchMeta() {
+                                                      fetch('meta.php')
+                                                        .then(res => res.text())
+                                                        .then(data => {
+                                                          document.getElementById('shoutcastmetacontent').textContent = data;
+                                                        })
+                                                        .catch(err => console.error('Erreur! ', err));
+                                                    }
+                                                    fetchMeta();
+                                                    setInterval(fetchMeta, 3000);
+                                                </script>
+                                            </body> </html>
