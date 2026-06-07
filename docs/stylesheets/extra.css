@@ -15,7 +15,68 @@
   color: #cfcfcf;
 }
 
-[data-md-color-scheme="slate"] .md-typeset pre {
-  background-color: #161b22;
-  border: 1px solid #30363d;
+/* SwaggerUI extra CSS */
+
+.swagger-ui .info .title,
+.swagger-ui .model-title,
+.swagger-ui .opblock-tag,
+.swagger-ui .opblock .opblock-summary-description,
+.swagger-ui .opblock .opblock-section-header h4,
+.swagger-ui .tab li button.tablinks,
+.swagger-ui table thead tr td,
+.swagger-ui table thead tr th,
+.swagger-ui .renderedMarkdown p,
+.swagger-ui .info p,
+.swagger-ui p,
+.swagger-ui .markdown p,
+.swagger-ui .markdown pre,
+.swagger-ui .renderedMarkdown pre,
+.swagger-ui .response-col_links,
+.swagger-ui .response-col_status,
+.swagger-ui .opblock-summary-path,
+.swagger-ui .opblock .opblock-summary-operation-id,
+.swagger-ui .opblock .opblock-summary-path,
+.swagger-ui .opblock .opblock-summary-path__deprecated,
+.swagger-ui .parameters-col_name,
+.swagger-ui .parameter__name,
+.swagger-ui .parameter__type,
+.swagger-ui .parameter__deprecated,
+.swagger-ui .parameter__in {
+    color: #ffffff !important;
+}
+
+.swagger-ui input[type=text],
+.swagger-ui select,
+.swagger-ui textarea {
+    background: #1e202c !important;
+    color: #ffffff !important;
+    border: 1px solid #40455a !important;
+}
+
+.swagger-ui,
+.swagger-ui .response-col_status,
+.swagger-ui .response-col_links,
+.swagger-ui .responses-inner h5,
+.swagger-ui .responses-inner h4 {
+  color: #eeeeee !important;
+}
+
+.swagger-ui .btn-clear {
+  color: #dfdfdf !important;
+}
+
+.swagger-ui .scheme-container {
+    background-color: #2e303e !important;
+}
+
+.swagger-ui .opblock .opblock-section-header {
+  background-color: #6e7294 !important;
+}
+
+.swagger-ui .arrow {
+  fill: #eeeeee;
+}
+
+#reference-de-lapi-de-riff-version-openapi {
+  display: none;
 }
