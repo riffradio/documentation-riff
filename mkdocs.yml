@@ -16,6 +16,7 @@ theme:
 
 plugins:
   - search
+  - render_swagger
 
 extra_css:
   - stylesheets/extra.css
