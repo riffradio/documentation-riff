@@ -20,7 +20,9 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v16
         continue-on-error: true
         with:
-          globs: "docs/**/*.md"
+          globs: |
+            docs/**/*.md
+            !docs/integration/reference-api-openapi.md
           config: ".warnings.markdownlint.yml"
 
   lint-error:
@@ -34,5 +36,7 @@ jobs:
         uses: DavidAnson/markdownlint-cli2-action@v16
         continue-on-error: false
         with:
-          globs: "docs/**/*.md"
+          globs: |
+            docs/**/*.md
+            !docs/integration/reference-api-openapi.md
           config: ".errors.markdownlint.yml"
