@@ -1,0 +1,9 @@
+default: false
+
+MD001: true
+MD011: true
+MD024:
+  siblings_only: true
+MD042: true
+MD047: true
+MD051: true

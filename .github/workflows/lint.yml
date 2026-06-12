@@ -1,0 +1,38 @@
+name: Linting - Markdown
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-warning:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du repo
+        uses: actions/checkout@v4
+
+      - name: Markdownlint - Warnings
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        continue-on-error: true
+        with:
+          globs: "docs/**/*.md"
+          config: ".warnings.markdownlint.yml"
+
+  lint-error:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du repo
+        uses: actions/checkout@v4
+
+      - name: Markdownlint - Errors
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        continue-on-error: false
+        with:
+          globs: "docs/**/*.md"
+          config: ".errors.markdownlint.yml"

@@ -1,0 +1,18 @@
+default: true
+
+MD001: false
+MD011: false
+MD024: false
+MD042: false
+MD047: false
+MD051: false
+MD013: false
+MD014: false
+MD025: false
+MD026: false
+MD029: false
+MD033: false
+MD034: false
+MD036: false
+MD043: false
+MD044: false
