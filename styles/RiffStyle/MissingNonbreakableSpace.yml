@@ -1,0 +1,7 @@
+extends: substitution
+message: "Les signes de ponctuation double (! ? : ; « ») et de pourcentage doivent généralement être précédés d'une espace insécable (alt+0160). Vérifiez que l'absence d'espace est correct."
+level: warning
+ignorecase: true
+nonword: true
+swap:
+  '([\w)\]}"»”’%])(?<!\b(?:https?|s?ftp|irc|mailto|file|ws|wss|tel|data|localhost)|\.[a-zA-Z0-9]{1,10}|&(?:[a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+))([!:;?%€])(?=\s|[)\]}"»”’!?.]|$)': '$1\x{00A0}$2'

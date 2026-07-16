@@ -1,0 +1,8 @@
+extends: substitution
+message: "La plupart du temps, il est préférable de mettre en avant %s plutôt que le .com ou le .fr."
+level: suggestion
+ignorecase: true
+nonword: false
+
+swap:
+  '(www.)?riff-radio(.com|.fr)': '$1riff-radio.org'

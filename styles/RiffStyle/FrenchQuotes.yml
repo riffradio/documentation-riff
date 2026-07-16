@@ -1,0 +1,7 @@
+extends: substitution
+message: "S'il s'agit bien de guillemets de premier niveau, privilégiez les guillemets typographiques françaises (%s) aux guillemets informatique (%s)."
+level: warning
+ignorecase: true
+nonword: true
+swap:
+  '(?<=^(?:[^"]*"[^"]*")*[^"]*)((?:^|\s))"((?:[^"]|"[^\s"](?:[^"]*?[^\s"])?")*?[^\s"])"': '$1« $2 »'

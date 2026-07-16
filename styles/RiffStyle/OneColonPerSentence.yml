@@ -1,0 +1,6 @@
+extends: occurrence
+message: "On évite généralement de mettre plusieurs fois : dans une seule phrase."
+level: suggestion
+scope: sentence
+max: 1
+token: ':'

@@ -1,0 +1,15 @@
+extends: substitution
+message: "Vous vouliez peut-être plutôt dire %s ?"
+level: suggestion
+ignorecase: true
+nonword: true
+
+swap:
+  métal: metal
+  évènement: événement
+  'https//': 'https://'
+  'http://': 'https://'
+  'ftp//': 'ftp://'
+  'irc//': 'irc://'
+  '\bacc\b': aac
+  '(M|m)(é|e)ta (B|b)roadcaster': 'Metas Broadcaster'
