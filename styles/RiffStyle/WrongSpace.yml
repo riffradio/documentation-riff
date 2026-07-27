@@ -1,0 +1,8 @@
+extends: substitution
+message: "Les signes de ponctuation double (! ? : ; « ») et de pourcentage doivent généralement être précédés d'une espace insécable (alt+0160). Vérifiez que l'utilisation d'espaces ordinaires se justifie ici."
+level: warning
+ignorecase: true
+nonword: true
+swap:
+  ' ([:!?;»%])': '\u00A0$1'
+  '« ': '«\u00A0'

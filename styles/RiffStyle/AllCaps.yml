@@ -1,0 +1,23 @@
+extends: substitution
+message: "Sauf cas particulier, ces mots s'écrivent tout en majuscule. (%s plutôt que %s)"
+level: warning
+ignorecase: false
+nonword: false
+
+swap:
+  '(?<!\.)(m|M)p3': MP3
+  '(?<!\.)(a|A)ac': AAC
+  '(?<!\.)(o|O)gg': OGG
+  '(?<!\.)(m|M)p4': MP4
+  '(?<!\.)(w|W)av': WAV
+  '(?<!\.)(f|F)lac': FLAC
+  '(?<!\.)(j|J)son': JSON
+  '(?<!\.)(h|H)tml': HTML
+  '(?<!\.)(p|P)hp': PHP
+  '(h|H)ttp(?!://)': HTTP
+  '(h|H)ttps(?!://)': HTTPS
+  '(i|I)rc(?!://)': IRC
+  '(f|F)tp(?!://)': FTP
+  '(v|V)lc': VLC
+  '(?<!\.)(d|D)ll': DLL
+  '(a|A)ws': AWS

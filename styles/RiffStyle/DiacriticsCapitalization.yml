@@ -1,0 +1,19 @@
+extends: substitution
+message: "Même en majuscule, respectez les caractères spéciaux du français sur ce mot (%s plutôt que %s)."
+level: warning
+ignorecase: false
+nonword: false
+
+swap:
+  Ca: Ça
+  'Etat(s)?': 'État$1'
+  'Etai(en)?t': 'Étai$1t'
+  Etant: Étant
+  'Eté(s)?' : 'Été$1'
+  'Equipe(s)?': 'Équipe$1'
+  Evidemment : Évidemment
+  Eventuellement : Éventuellement
+  'Egal(e)?(s)?': 'Égal$1$2'
+  'Ecrit(s)?': 'Écrit$1'
+  Ecrivez: Écrivez
+  'Ev(é|è)nement(s)?': 'Événement$2'

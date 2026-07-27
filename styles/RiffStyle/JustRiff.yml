@@ -1,0 +1,8 @@
+extends: substitution
+message: "Évitez \"Riff Radio\" en dehors de l'URL du site. On écrit Riff tout court."
+level: error
+ignorecase: false
+nonword: false
+
+swap:
+  'Riff (R|r)adio': Riff

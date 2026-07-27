@@ -1,0 +1,13 @@
+extends: substitution
+message: "Ce terme constitue (probablement) un anglicisme inutile. Vous pourriez privilégier par exemple %s"
+level: suggestion
+ignorecase: true
+nonword: false
+swap:
+  'implément(er|é|ée|ées|ez|ent|e|ant|ons|es|ait|ais|aient|ions|iez)?': '(mettre un œuvre)|(mettre en place)'
+  'implémentation(s)?': '(mise$1 en œuvre)|(mise$1 en place)'
+  'digital(e)?(s)?': 'numérique$1$2'
+  '(en)?crypt(e|er|é|ons|ez|ent|iez|ions|ée|ées|és|ait|ais|aient|ant)?': 'chiffr$2'
+  'cryptage(s)?': 'chiffrement$1'
+  'support(e|er|ent|ait|ais|aient|ez|ons|iez|ions|é|ée|ées|és|ant)?': '(prendre en charge)|(être compatible)|(accepter)|'
+  'Mr\. ': 'M\. '

@@ -1,0 +1,32 @@
+extends: substitution
+message: "Ce mot prend de préférence une majuscule en début de mot en contexte rédactionnel (%s plutôt que %s)."
+level: warning
+ignorecase: false
+nonword: false
+swap:
+  internet: Internet
+  'riff\b(?!-radio\.(?:org|fr|com))': Riff
+  apache: Apache
+  winamp: Winamp
+  nullsoft: Nullsoft
+  shoutcast: Shoutcast
+  icecast: Icecast
+  firefox: Firefox
+  chromium: Chromium
+  discord: Discord
+  'Riff sampler|riff Sampler|riff sampler': 'Riff Sampler'
+  'Metas broadcaster|metas Broadcaster|metas broadcaster': 'Metas Broadcaster'
+  'riff Player|Riff player|riff player': 'Riff Player'
+  android: Android
+  windows: Windows
+  linux: Linux
+  mac: Mac
+  instagram: Instagram
+  facebook: Facebook
+  bluesky: Bluesky
+  twitch: Twitch
+  google: Google
+  oracle: Oracle
+  apple: Apple
+  microsoft: Microsoft
+  youtube: YouTube

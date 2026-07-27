@@ -1,0 +1,7 @@
+extends: substitution
+message: "Ce mot s'écrit vraisemblablement avec le caractère œ (%s)"
+level: warning
+ignorecase: true
+nonword: false
+swap:
+  '(\w*?)(?:(?<![c])oe|oe(?=ur))(\w*)': $1œ$2

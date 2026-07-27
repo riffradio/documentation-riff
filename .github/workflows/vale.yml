@@ -1,0 +1,26 @@
+name: Linting - Vale-reviewdog
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  vale:
+    name: runner / vale
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: vale-cli/vale-action@v2.1.1
+        with:
+          files: all
+          reporter: github-pr-check
+          fail_on_error: true
+          filter_mode: nofilter
+          token: ${{secrets.GITHUB_TOKEN}}

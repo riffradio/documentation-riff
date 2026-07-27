@@ -1,0 +1,9 @@
+extends: existence
+message: "Todo/À faire détecté. Ne mettez pas en ligne de fichier non terminé. Si ce cas est un faux positif, entourez le bloc concerné de <!-- vale RiffStyle.UnfinishedFile = NO --> et <!-- vale RiffStyle.UnfinishedFile = YES -->"
+level: error
+ignorecase: false
+nonword: false
+
+tokens:
+  - 'To( |-)?do(?!(-| )?list)'
+  - '(A|À) (faire|finir)'

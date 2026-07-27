@@ -1,0 +1,13 @@
+extends: consistency
+message: "Incohérence détectée dans l'écriture de %s dans le même document. Privilégiez de préférence l'un ou l'autre."
+level: suggestion
+ignorecase: false
+either:
+  (e|E)mail: (e|E)-mail
+  web: '(?<!^)(?<!^[\s\-–—•*+("“«]+)(?<![.!?]\s)Web'
+  liquidsoap: '(?<!^)(?<!^[\s\-–—•*+("“«]+)(?<![.!?]\s)Liquidsoap'
+  '(m|M)eta(donnée)?(s)?': '(m|M)éta$1$2'
+  '(o|O)pen-source': '(o|O)pen source'
+  '(K|k|M|m|G|g)(b|B)/s': '(K|k|M|m|G|g)(b|B)ps'
+  KHz: Khz
+  '(é|É)mote(s)?': '(e|E)mote(s)?'
